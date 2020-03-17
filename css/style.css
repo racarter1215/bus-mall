@@ -1,3 +1,33 @@
 body {
-    
+    background-color: peachpuff;
+    width: 1000px;
+
 }
+
+header {
+    height: 200px;
+    margin-top: 50px;
+}
+
+header img {
+    float: left;
+
+}
+div#ranker {
+    float: left;
+}
+
+#ranking {
+
+}
+
+div#VoteList img {
+    width: 150px;
+    height: 150px;
+}
+
+#userinformation {
+
+}
+
+

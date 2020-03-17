@@ -2,6 +2,9 @@
 
 var allImages = [];
 var voteIterations = 0;
+var imageNames = [];
+var timesClicked = [];
+
 
 function VoteImageRotator(name, imagePath) {
     this.name = name;
@@ -19,16 +22,16 @@ new VoteImageRotator('breakfast', 'img/breakfast.jpg');
 new VoteImageRotator('bubblegum', 'img/bubblegum.jpg');
 new VoteImageRotator('chair', 'img/chair.jpg');
 new VoteImageRotator('cthulhu', 'img/cthulhu.jpg');
-new VoteImageRotator('dog and duck', 'img/got-duck.jpg');
+new VoteImageRotator('dog and duck', 'img/dog-duck.jpg');
 new VoteImageRotator('dragon', 'img/dragon.jpg');
 new VoteImageRotator('pen', 'img/pen.jpg');
 new VoteImageRotator('pet sweep', 'img/pet-sweep.jpg');
 new VoteImageRotator('scissors', 'img/scissors.jpg');
 new VoteImageRotator('shark', 'img/shark.jpg');
-new VoteImageRotator('sweep', 'img/sweep.jpg');
-new VoteImageRotator('tantrum', 'img/tantrum.jpg');
+new VoteImageRotator('sweep', 'img/sweep.png');
+new VoteImageRotator('tauntaun', 'img/tauntaun.jpg');
 new VoteImageRotator('unicorn', 'img/unicorn.jpg');
-new VoteImageRotator('usb', 'img/usb.jpg');
+new VoteImageRotator('usb', 'img/usb.gif');
 new VoteImageRotator('water can', 'img/water-can.jpg');
 new VoteImageRotator('wine glass', 'img/wine-glass.jpg');
 // console.log(allImages);
@@ -79,6 +82,9 @@ function showResults() {
         rank.textContent = returnMessage;
         console.log(returnMessage);
         listEl.appendChild(rank);
+        imageNames.push(allImages[i]);
+        timesClicked.push(allImages[i]);
+        console.log(timesClicked);
     }
 }
 
@@ -91,17 +97,39 @@ function clickHandler(event) {
         if (allImages[i].name === event.target.name) {
             allImages[i].numClicked++;
             imageRender();
-        } if (voteIterations <= 25) {
+        } if (voteIterations >= 25) {
             img1.removeEventListener('click', clickHandler);
             img2.removeEventListener('click', clickHandler);
             img3.removeEventListener('click', clickHandler);
             event = false;
             alert("That's all the votes we need. See your results and let us know what you think.");
             showResults();
+            new Chart;
             break;
         }
     }
 }
+
+new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [2478,5267,734,784,433]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
 
 img1.addEventListener('click', clickHandler);
 img2.addEventListener('click', clickHandler);
