@@ -36,3 +36,68 @@ var img1 = document.getElementById('img1');
 var img2 = documenet.getElementById('img2');
 var img3 = document.getElementById('img3');
 
+function generateImage() {
+    var i = Math.floor(Math.random() * allImages.length);
+    while (
+        allImages[i].name === img1.name || allImages[i].name === img2.name || allImages[i].name === img3.name
+    ) {
+        index = Math.floor(Math.random() * allImages.length);
+    }
+    return allImages[i];
+}
+
+function imageRender() {
+    
+    var newImg1 = generateImage();
+    img1.src = newImg1.imagePath;
+    img1.name = newImg1.name;
+    newImg1.timesRendered++;
+    voteIterations = voteIterations++;
+
+    var newImg2 = generateImage();
+    img2.src = newImg2.imagePath;
+    img2.name = newImg2.name;
+    newImg2.timesRendered++;
+    voteIterations = voteIterations++;
+
+    var newImg3 = generateImage();
+    img3.src = newImg3.imagePath;
+    img3.name = newImg3.name;
+    newImg3.timesRendered++;
+    voteIterations = voteIterations++;
+}
+
+imageRender();
+
+function showResults() {
+    var listEl = document.getElementById('ranking');
+
+    for (var i = 0; i < allImages.length; i++) {
+        var rank = document.createElement('li');
+        var returnMessage = (allImages[i].name + 'recieved ' + allImages[i].numClicked + 'votes and was shown to you ' + allImages[i].timesRendered + 'times.');
+        rank.textContent = 'message';
+        listEl.appendChild(ranker);
+    }
+}
+
+function clickHandler(event) {
+    var listEl = document.getElementById('ranking');
+    listEl.innerHTML = "";
+
+    for (var i = 0; i < allImages.length; i++) {
+        if (allImages[i].name === event.target.name) {
+            allImages[i].numClicked++;
+            voteIterations++;
+        } if (voteIterations === 25) {
+            event = false;
+            alert("That's all the votes we need. See your results and let us know what you think.");
+            showResults();
+            break;
+        }
+    }
+    generateImage();
+}
+
+img1.addEventListener('click', clickHandler);
+img2.addEventListener('click', clickHandler);
+img3.addEventListener('click', clickHandler);
