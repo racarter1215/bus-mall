@@ -83,15 +83,18 @@ function showResults() {
 }
 
 function clickHandler(event) {
+    voteIterations++;
     var listEl = document.getElementById('ranking');
     listEl.innerHTML = "";
     console.log(event);
     for (var i = 0; i < allImages.length; i++) {
         if (allImages[i].name === event.target.name) {
             allImages[i].numClicked++;
-            voteIterations++;
             imageRender();
         } if (voteIterations <= 25) {
+            img1.removeEventListener('click', clickHandler);
+            img2.removeEventListener('click', clickHandler);
+            img3.removeEventListener('click', clickHandler);
             event = false;
             alert("That's all the votes we need. See your results and let us know what you think.");
             showResults();
