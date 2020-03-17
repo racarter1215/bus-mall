@@ -31,9 +31,9 @@ new VoteImageRotator('unicorn', 'img/unicorn.jpg');
 new VoteImageRotator('usb', 'img/usb.jpg');
 new VoteImageRotator('water can', 'img/water-can.jpg');
 new VoteImageRotator('wine glass', 'img/wine-glass.jpg');
-
+// console.log(allImages);
 var img1 = document.getElementById('img1');
-var img2 = documenet.getElementById('img2');
+var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
 
 function generateImage() {
@@ -41,8 +41,9 @@ function generateImage() {
     while (
         allImages[i].name === img1.name || allImages[i].name === img2.name || allImages[i].name === img3.name
     ) {
-        index = Math.floor(Math.random() * allImages.length);
+        i = Math.floor(Math.random() * allImages.length);
     }
+    console.log(allImages[i] + 'return this for generated images');
     return allImages[i];
 }
 
@@ -52,19 +53,19 @@ function imageRender() {
     img1.src = newImg1.imagePath;
     img1.name = newImg1.name;
     newImg1.timesRendered++;
-    voteIterations = voteIterations++;
+    
 
     var newImg2 = generateImage();
     img2.src = newImg2.imagePath;
     img2.name = newImg2.name;
     newImg2.timesRendered++;
-    voteIterations = voteIterations++;
+   
 
     var newImg3 = generateImage();
     img3.src = newImg3.imagePath;
     img3.name = newImg3.name;
     newImg3.timesRendered++;
-    voteIterations = voteIterations++;
+   console.log(newImg1 + " " + newImg2 + " " + newImg3);
 }
 
 imageRender();
@@ -75,15 +76,16 @@ function showResults() {
     for (var i = 0; i < allImages.length; i++) {
         var rank = document.createElement('li');
         var returnMessage = (allImages[i].name + 'recieved ' + allImages[i].numClicked + 'votes and was shown to you ' + allImages[i].timesRendered + 'times.');
-        rank.textContent = 'message';
-        listEl.appendChild(ranker);
+        rank.textContent = returnMessage;
+        console.log(returnMessage);
+        listEl.appendChild(rank);
     }
 }
 
 function clickHandler(event) {
     var listEl = document.getElementById('ranking');
     listEl.innerHTML = "";
-
+    console.log(event);
     for (var i = 0; i < allImages.length; i++) {
         if (allImages[i].name === event.target.name) {
             allImages[i].numClicked++;
