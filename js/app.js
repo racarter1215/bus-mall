@@ -90,14 +90,14 @@ function clickHandler(event) {
         if (allImages[i].name === event.target.name) {
             allImages[i].numClicked++;
             voteIterations++;
-        } if (voteIterations === 25) {
+            imageRender();
+        } if (voteIterations <= 25) {
             event = false;
             alert("That's all the votes we need. See your results and let us know what you think.");
             showResults();
             break;
         }
     }
-    generateImage();
 }
 
 img1.addEventListener('click', clickHandler);
