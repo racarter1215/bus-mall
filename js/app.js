@@ -5,6 +5,71 @@ var voteIterations = 0;
 var imageNames = [];
 var timesClicked = [];
 
+var ctx = document.getElementById('my-canvas').getContext('2d');
+var chart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Images',
+      data: [],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)'
+      ],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
 
 function VoteImageRotator(name, imagePath) {
     this.name = name;
@@ -12,28 +77,29 @@ function VoteImageRotator(name, imagePath) {
     this.numClicked = 0;
     this.timesRendered = 0;
     allImages.push(this);
+    imageNames.push(this.name)
 }
 
-new VoteImageRotator('bag', 'img/bag.jpg');
-new VoteImageRotator('banana', 'img/banana.jpg');
-new VoteImageRotator('bathroom', 'img/bathroom.jpg');
-new VoteImageRotator('boots', 'img/boots.jpg');
-new VoteImageRotator('breakfast', 'img/breakfast.jpg');
-new VoteImageRotator('bubblegum', 'img/bubblegum.jpg');
-new VoteImageRotator('chair', 'img/chair.jpg');
-new VoteImageRotator('cthulhu', 'img/cthulhu.jpg');
-new VoteImageRotator('dog and duck', 'img/dog-duck.jpg');
-new VoteImageRotator('dragon', 'img/dragon.jpg');
-new VoteImageRotator('pen', 'img/pen.jpg');
-new VoteImageRotator('pet sweep', 'img/pet-sweep.jpg');
-new VoteImageRotator('scissors', 'img/scissors.jpg');
-new VoteImageRotator('shark', 'img/shark.jpg');
-new VoteImageRotator('sweep', 'img/sweep.png');
-new VoteImageRotator('tauntaun', 'img/tauntaun.jpg');
-new VoteImageRotator('unicorn', 'img/unicorn.jpg');
-new VoteImageRotator('usb', 'img/usb.gif');
-new VoteImageRotator('water can', 'img/water-can.jpg');
-new VoteImageRotator('wine glass', 'img/wine-glass.jpg');
+new VoteImageRotator('Bag', 'img/bag.jpg');
+new VoteImageRotator('Banana', 'img/banana.jpg');
+new VoteImageRotator('Bathroom', 'img/bathroom.jpg');
+new VoteImageRotator('Boots', 'img/boots.jpg');
+new VoteImageRotator('Breakfast', 'img/breakfast.jpg');
+new VoteImageRotator('Bubblegum', 'img/bubblegum.jpg');
+new VoteImageRotator('Chair', 'img/chair.jpg');
+new VoteImageRotator('Cthulhu', 'img/cthulhu.jpg');
+new VoteImageRotator('Dog and Duck', 'img/dog-duck.jpg');
+new VoteImageRotator('Dragon', 'img/dragon.jpg');
+new VoteImageRotator('Pen', 'img/pen.jpg');
+new VoteImageRotator('Pet Sweep', 'img/pet-sweep.jpg');
+new VoteImageRotator('Scissors', 'img/scissors.jpg');
+new VoteImageRotator('Shark', 'img/shark.jpg');
+new VoteImageRotator('Sweep', 'img/sweep.png');
+new VoteImageRotator('Tauntaun', 'img/tauntaun.jpg');
+new VoteImageRotator('Unicorn', 'img/unicorn.jpg');
+new VoteImageRotator('USB', 'img/usb.gif');
+new VoteImageRotator('Water Can', 'img/water-can.jpg');
+new VoteImageRotator('Wine Glass', 'img/wine-glass.jpg');
 // console.log(allImages);
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
@@ -82,9 +148,13 @@ function showResults() {
         rank.textContent = returnMessage;
         console.log(returnMessage);
         listEl.appendChild(rank);
-        imageNames.push(allImages[i]);
-        timesClicked.push(allImages[i]);
-        console.log(timesClicked);
+    }
+}
+
+function graphGenerator() {
+    for (var indexGraph= 0; indexGraph < allImages.length; indexGraph++) {
+        chart.data.labels.push(allImages[indexGraph].name);
+        chart.data.datasets[0].data.push(allImages[indexGraph].numClicked);
     }
 }
 
@@ -92,7 +162,7 @@ function clickHandler(event) {
     voteIterations++;
     var listEl = document.getElementById('ranking');
     listEl.innerHTML = "";
-    console.log(event);
+    // console.log(event);
     for (var i = 0; i < allImages.length; i++) {
         if (allImages[i].name === event.target.name) {
             allImages[i].numClicked++;
@@ -104,32 +174,13 @@ function clickHandler(event) {
             event = false;
             alert("That's all the votes we need. See your results and let us know what you think.");
             showResults();
-            new Chart;
+            graphGenerator();
+            chart.update();
             break;
         }
     }
 }
 
-new Chart(document.getElementById("bar-chart"), {
-    type: 'bar',
-    data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-      datasets: [
-        {
-          label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
-        }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Predicted world population (millions) in 2050'
-      }
-    }
-});
 
 img1.addEventListener('click', clickHandler);
 img2.addEventListener('click', clickHandler);
