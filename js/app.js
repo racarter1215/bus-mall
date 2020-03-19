@@ -3,8 +3,6 @@
 var allImages = [];
 var voteIterations = 0;
 var imageNames = [];
-var timesClicked = [];
-var saveVoteData = [];
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
@@ -134,7 +132,7 @@ function imageRender() {
     img3.src = newImg3.imagePath;
     img3.name = newImg3.name;
     newImg3.timesRendered++;
-   console.log(newImg1 + " " + newImg2 + " " + newImg3);
+    console.log(newImg1 + " " + newImg2 + " " + newImg3);
 }
 
 imageRender();
@@ -192,12 +190,12 @@ function findTheData() {
         if (storedImageAndVoteList) {
         allImages = JSON.parse(storedImageAndVoteList) 
         var voteIterations = 25;
-        img1.removeEventListener('click', clickHandler);
-        img2.removeEventListener('click', clickHandler);
-        img3.removeEventListener('click', clickHandler);
+        // img1.removeEventListener('click', clickHandler);
+        // img2.removeEventListener('click', clickHandler);
+        // img3.removeEventListener('click', clickHandler);
         event = false;
         showResults();
-        graphGenerator();
+        // graphGenerator();
         chart.update();
     }
 }
