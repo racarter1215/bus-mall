@@ -134,7 +134,7 @@ function imageRender() {
     img3.src = newImg3.imagePath;
     img3.name = newImg3.name;
     newImg3.timesRendered++;
-   console.log(newImg1 + " " + newImg2 + " " + newImg3);
+    console.log(newImg1 + " " + newImg2 + " " + newImg3);
 }
 
 imageRender();
