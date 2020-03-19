@@ -3,8 +3,6 @@
 var allImages = [];
 var voteIterations = 0;
 var imageNames = [];
-var timesClicked = [];
-var saveVoteData = [];
 var img1 = document.getElementById('img1');
 var img2 = document.getElementById('img2');
 var img3 = document.getElementById('img3');
@@ -192,12 +190,12 @@ function findTheData() {
         if (storedImageAndVoteList) {
         allImages = JSON.parse(storedImageAndVoteList) 
         var voteIterations = 25;
-        img1.removeEventListener('click', clickHandler);
-        img2.removeEventListener('click', clickHandler);
-        img3.removeEventListener('click', clickHandler);
+        // img1.removeEventListener('click', clickHandler);
+        // img2.removeEventListener('click', clickHandler);
+        // img3.removeEventListener('click', clickHandler);
         event = false;
         showResults();
-        graphGenerator();
+        // graphGenerator();
         chart.update();
     }
 }
