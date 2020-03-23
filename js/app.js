@@ -73,6 +73,7 @@ var chart = new Chart(ctx, {
   }
 });
 
+
 new VoteImageRotator('Bag', 'img/bag.jpg');
 new VoteImageRotator('Banana', 'img/banana.jpg');
 new VoteImageRotator('Bathroom', 'img/bathroom.jpg');
@@ -93,6 +94,7 @@ new VoteImageRotator('Unicorn', 'img/unicorn.jpg');
 new VoteImageRotator('USB', 'img/usb.gif');
 new VoteImageRotator('Water Can', 'img/water-can.jpg');
 new VoteImageRotator('Wine Glass', 'img/wine-glass.jpg');
+
 
 function VoteImageRotator(name, imagePath) {
     this.name = name;
